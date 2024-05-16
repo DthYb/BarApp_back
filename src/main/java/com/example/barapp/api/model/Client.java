@@ -2,9 +2,9 @@ package com.example.barapp.api.model;
 
 public class Client {
     private int id;
-    private Panier panier;
+    private int panier;
 
-    public Client(int id, Panier panier){
+    public Client(int id, int panier){
         this.id = id;
         this.panier = panier;
     }
@@ -17,11 +17,11 @@ public class Client {
         this.id = id;
     }
 
-    public Panier getPanier() {
+    public int getPanier() {
         return panier;
     }
 
-    public void setPanier(Panier panier) {
+    public void setPanier(int panier) {
         this.panier = panier;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.barapp.api.model.Barmaker;
 
@@ -30,4 +31,11 @@ public class BarmakerService {
         }
         return optional;
     }
+
+    // @Autowired
+    // private BarmakerRepository barmakerRepository
+
+    // public List<Barmaker> getAllBarmakers() {
+    //     return barmakerRepository.findAll();
+    // }
 }

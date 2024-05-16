@@ -1,14 +1,22 @@
 package com.example.barapp.api.model;
-
 import java.util.ArrayList;
+
 
 public class Panier {
     private int id;
-    private String etat;
+    private Status etat;
     private ArrayList<Integer> contenu;
-    private int montant;
+    private double montant;
+    private int numero;
 
-    public Panier(int id, String etat, ArrayList<Integer> contenu, int montant){
+    public enum Status {
+        panier_validé,
+        commande_envoyé,
+        commande_en_cours,
+        commande_terminé,
+    }
+
+    public Panier(int id, Status etat, ArrayList<Integer> contenu, double montant, int numero){
         this.id = id;
         this.etat = etat;
         this.contenu = new ArrayList<>(contenu);
@@ -23,12 +31,8 @@ public class Panier {
         this.id = id;
     }
 
-    public String getEtat() {
+    public Status getEtat() {
         return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
     }
 
     public ArrayList<Integer> getContenu() {
@@ -39,12 +43,20 @@ public class Panier {
         this.contenu = contenu;
     }
 
-    public int getMontant() {
+    public double getMontant() {
         return montant;
     }
 
-    public void setMontant(int montant) {
+    public void setMontant(double montant) {
         this.montant = montant;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
 }
