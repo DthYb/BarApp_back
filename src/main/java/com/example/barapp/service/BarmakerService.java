@@ -6,36 +6,34 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.barapp.api.Repository.BarmakerRepository;
 import com.example.barapp.api.model.Barmaker;
 
 @Service
 public class BarmakerService {
-    
-    private List<Barmaker> barmakerList;
 
-    public BarmakerService() {
-        barmakerList = new ArrayList<>();
+    @Autowired
+    private BarmakerRepository barmakerRepository;
 
-        Barmaker barmaker1 = new Barmaker(1,"mail","password","michel","sardou");
-
-        barmakerList.add(barmaker1);
+    public Barmaker getBarmakerById(int id) {
+        return barmakerRepository.findById(id).orElse(null);
     }
 
-    public Optional<Barmaker> getBarmaker(Integer id) {
-        Optional optional = Optional.empty();
-        for(Barmaker barmaker : barmakerList) {
-            if(id==barmaker.getId()){
-                optional = Optional.of(barmaker);
-                return optional;
-            }
+    public Barmaker createBarmaker(Barmaker barmaker) {
+        return barmakerRepository.save(barmaker);
+    }
+
+    public Barmaker updateBarmaker(int id, Barmaker barmaker) {
+        if (barmakerRepository.existsById(id)) {
+            barmaker.setId(id);
+            return barmakerRepository.save(barmaker);
         }
-        return optional;
+        return null;
     }
 
-    // @Autowired
-    // private BarmakerRepository barmakerRepository
+    public void deleteBarmaker(int id) {
+        barmakerRepository.deleteById(id);
+    }
 
-    // public List<Barmaker> getAllBarmakers() {
-    //     return barmakerRepository.findAll();
-    // }
 }

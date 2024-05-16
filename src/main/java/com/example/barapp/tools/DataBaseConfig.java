@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class DataBaseConfig {
     private static final String URL = "jdbc:mysql://localhost:3306/BarApp";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     public static Connection getConnection() throws SQLException {

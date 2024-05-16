@@ -4,40 +4,42 @@ import com.example.barapp.api.model.Barmaker;
 import com.example.barapp.service.BarmakerService;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("/api/barmaker")
 public class BarmakerController {
 
+    @Autowired
     private BarmakerService barmakerService;
 
-    @Autowired
-    public BarmakerController(BarmakerService barmakerService){
-        this.barmakerService = barmakerService;
-    }
-    
-    @GetMapping("/barmaker")
-    public Barmaker getBarmaker(@RequestParam Integer id) {
-        Optional<Barmaker> barmaker = barmakerService.getBarmaker(id);
-        if(barmaker.isPresent()){
-            return (Barmaker) barmaker.get();
-        }
-        return null;
+    @GetMapping("/{id}")
+    public Barmaker getBarmakerById(@PathVariable int id) {
+        return barmakerService.getBarmakerById(id);
     }
 
-    // @GetMapping("/barmaker")
-    // public ResponseEntity<List<Barmaker>> getAllBarmakers() {
-    //     List<Barmaker> barmakers = barmakerService.getAllBarmakers();
-    //     return new ResponseEntity<>(barmakers, HttpStatus.OK);
-    // }
-    
+    @PostMapping
+    public Barmaker createBarmaker(@RequestBody Barmaker barmaker) {
+        return barmakerService.createBarmaker(barmaker);
+    }
 
+    @PutMapping("/{id}")
+    public Barmaker updateBarmaker(@PathVariable int id, @RequestBody Barmaker barmaker) {
+        return barmakerService.updateBarmaker(id, barmaker);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBarmaker(@PathVariable int id) {
+        barmakerService.deleteBarmaker(id);
+    }
 }
